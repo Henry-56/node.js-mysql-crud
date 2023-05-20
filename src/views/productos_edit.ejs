@@ -1,0 +1,55 @@
+<%- include('partials/_header') %>
+
+<div class="container mt-5" >
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/productos/update/<%= data.id %>" method="post" enctype="multipart/form-data">
+                        <div class="from-group">
+                            <input type="text" name="nombre" value="<%= data.nombre %>" class="form-control">
+                        </div>
+                        <div class="from-group">
+                            <input type="text" name="descripcion" value="<%= data.descripcion %>" class="form-control">
+                        </div>
+                        <div class="from-group">
+                            <input type="text" name="precio" value="<%= data.precio %>" class="form-control">
+                        </div>
+                        <div class="from-group">
+                            <input type="text" name="talla" value="<%= data.talla %>" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Colores disponibles:</label>
+                            <select name="color[]" multiple class="form-control">
+                                <option value="rojo" <%= data.color.includes('rojo') ? 'selected' : '' %>>Rojo</option>
+                                <option value="azul" <%= data.color.includes('azul') ? 'selected' : '' %>>Azul</option>
+                                <option value="verde" <%= data.color.includes('verde') ? 'selected' : '' %>>Verde</option>
+                                <option value="amarillo" <%= data.color.includes('amarillo') ? 'selected' : '' %>>Amarillo</option>
+                                <option value="blanco" <%= data.color.includes('blanco') ? 'selected' : '' %>>Blanco</option>
+                                <option value="negro" <%= data.color.includes('negro') ? 'selected' : '' %>>Negro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" name="img_url" value="<%= data.img_url %>" class="img-thumbnail">
+                        </div>
+                        <div class="from-group">
+                            <select name="categoria_id" class="form-control">
+                                <% for(let i = 0; i < categorias.length; i++) { %>
+                                    <option value="<%= categorias[i].id %>"><%= categorias[i].nombre %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <img src="<%= data.img_url %>" alt="Mi imagen">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                           Edit Productos 
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/_footer') %>

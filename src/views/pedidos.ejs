@@ -1,0 +1,87 @@
+<%- include('partials/_header') %>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>N</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Correo</th>
+                <th>Productos</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>SubTotal</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(data){ %>
+                <% Object.keys(data).reverse().forEach(function(key) { %>
+                    <tr>
+                        <td><%= data[key].id_pedido %></td>
+                        <td><%= data[key].name %></td>
+                        <td><%= data[key].telefono %></td>
+                        <td><%= data[key].direccion %></td>
+                        <td><%= data[key].email %></td>
+                        <td>
+                            <% data[key].productos_nombres.split(',').forEach(function(producto) { %>
+                                <%= producto.trim() %><br>
+                            <% }); %>
+                        </td>
+                        <td>
+                            <% data[key].cantidad.split(',').forEach(function(producto) { %>
+                                <%= producto.trim() %><br>
+                            <% }); %>
+                        </td>
+                        <td>
+                            <% data[key].productos_precios.split(',').forEach(function(producto) { %>
+                                S/<%= producto.trim() %><br>
+                            <% }); %>
+                        </td>
+                        <td>
+                            <% data[key].subtotal.split(',').forEach(function(producto) { %>
+                                S/<%= producto.trim() %><br>
+                            <% }); %>
+                        </td>
+                        <td>S/<%= data[key].total %></td>
+                        <td >
+                            <form action="/pedidos/update/<%= data[key].id_pedido %>" method="GET">
+                                <select class="form-select" style="width: auto" name="estado" id="estado-<%= data[key].id_pedido %>" onchange="this.form.submit()">
+                                    <option value="pendiente" <% if(data[key].estado === 'pendiente'){ %>selected<% } %>>Pendiente</option>
+                                    <option value="proceso" <% if(data[key].estado === 'proceso'){ %>selected<% } %>>En proceso</option>
+                                    <option value="completado" <% if(data[key].estado === 'completado'){ %>selected<% } %>>Completado</option>
+                                </select>
+                            </form>
+                        </td>
+                        
+                        
+                        <td>
+                            <form action="/enviar-correo" method="POST">
+                                <input type="hidden" name="id_pedido" value="<%= data[key].id_pedido %>">
+                                <input type="hidden" name="email" value="<%= data[key].email %>">
+                                <input type="hidden" name="productos_nombres" value="<%= data[key].productos_nombres %>">
+                                <input type="hidden" name="cantidad" value="<%= data[key].cantidad %>">
+                                <input type="hidden" name="productos_precios" value="<%= data[key].productos_precios %>">
+                                <input type="hidden" name="total" value="<%= data[key].total %>">
+                                <input type="hidden" name="estado" value="<%= data[key].estado %>">
+                                <button type="submit" class="btn btn-success">Enviar correo</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            <% }  %>
+        </tbody>
+    </table>
+</div>
+
+    </div>
+</div>
+
+<%- include('partials/_footer') %>
+

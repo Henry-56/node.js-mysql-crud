@@ -1,0 +1,61 @@
+<%- include('partials/_header') %>
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>N</th>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th>Correo</th>
+                        <th>Productos</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>SubTotal</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+             
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data){ %>
+                      <% Object.keys(data).reverse().forEach(function(key) { %>
+                        <% var productos = data[key].productos_nombres.split(',') %>
+                        <% var cantidades = data[key].cantidad.split(',') %>
+                        <% var precios = data[key].productos_precios.split(',') %>
+                        <% var subtotales = data[key].subtotal.split(',') %>
+                        <% for (var i = 0; i < productos.length; i++) { %>
+                          <tr>
+                            <% if (i == 0) { %>
+                              <td rowspan="<%= productos.length %>"><%= data[key].id_pedido %></td>
+                              <td rowspan="<%= productos.length %>"><%= data[key].name %></td>
+                              <td rowspan="<%= productos.length %>"><%= data[key].telefono %></td>
+                              <td rowspan="<%= productos.length %>"><%= data[key].direccion %></td>
+                              <td rowspan="<%= productos.length %>"><%= data[key].email %></td>
+                            <% } %>
+                            <td><%= productos[i].trim() %></td>
+                            <td><%= cantidades[i].trim() %></td>
+                            <td>S/<%= precios[i].trim() %></td>
+                            <td>S/<%= subtotales[i].trim() %></td>
+                            <% if (i == 0) { %>
+                              <td rowspan="<%= productos.length %>">S/<%= data[key].total %></td>
+                              <td rowspan="<%= productos.length %>"><%= data[key].estado %></td>
+                            <% } %>
+                          </tr>
+                        <% } %>
+                      <% }); %>
+                    <% } %>
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<%- include('partials/_footer') %>
