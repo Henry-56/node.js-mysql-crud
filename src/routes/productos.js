@@ -26,7 +26,7 @@ router.get('/productos', async function(req, res) {
       const hostname = req.hostname; // Obtener el nombre del host actual
       const protocol = req.protocol; // Obtener el protocolo utilizado (http o https)
       const port = req.app.get('port'); // Obtener el puerto configurado en la aplicación (en este caso, 3000)
-      const Image = `${protocol}://${hostname}:${port}/uploads/productos/${req.file.originalname}`;
+      const Image = `${protocol}://${hostname}/uploads/productos/${req.file.originalname}`;
       const data = req.body;
       const color = req.body.color[0]; // obtener el primer elemento del arreglo
       data.color = color;
