@@ -1,14 +1,20 @@
 const Sequelize = require('sequelize');
 
-const database = process.env.DB_NAME || 'riohuay';
-const username = process.env.DB_USERNAME || 'root';
-const password = process.env.DB_PASSWORD || '';
-const host = process.env.DB_HOST || 'localhost';
+const database = process.env.DB_NAME || 'btxm9giqegwdd5wvvzl0';
+const username = process.env.DB_USERNAME || 'uuurudfek1ox6nwf';
+const password = process.env.DB_PASSWORD || '0Ave8VTpQu2AgX01tgYB';
+const host = process.env.DB_HOST || 'btxm9giqegwdd5wvvzl0-mysql.services.clever-cloud.com';
 const dialect = process.env.DB_DIALECT || 'mysql';
 
 const sequelize = new Sequelize(database, username, password, {
   host: host,
-  dialect: dialect
+  dialect: dialect,
+  dialectOptions: {
+    ssl: {
+      require: true, // Require SSL/TLS
+      rejectUnauthorized: false // Accept self-signed certificates
+    }
+  }
 });
 
 sequelize

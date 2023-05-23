@@ -51,4 +51,20 @@ form {
   .btn:active {
     background-color: #00000028;
   }
-  
+  body {
+    background-color: #f8f9fa; /* Color de fondo personalizado */
+  }
+
+  .container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh;
+  }
+
+  .card {
+    width: 900px; /* Ancho personalizado */
+    max-width: 100%; /* Máximo ancho personalizado */
+    background-color: #ffffff; /* Color de fondo de la tarjeta */
+    padding: 30px; /* Espacio interno para el contenido */
+  }

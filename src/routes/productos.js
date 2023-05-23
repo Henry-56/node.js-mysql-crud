@@ -72,7 +72,7 @@ router.post('/productos/update/:id',midellwareImg, async function(req, res) {
     const hostname = req.hostname; // Obtener el nombre del host actual
     const protocol = req.protocol; // Obtener el protocolo utilizado (http o https)
     const port = req.app.get('port'); // Obtener el puerto configurado en la aplicación (en este caso, 3000)
-    const newImagen = `${protocol}://${hostname}:${port}/uploads/productos/${req.file.originalname}`;
+    const newImagen = `${protocol}://${hostname}/uploads/productos/${req.file.originalname}`;
     const newproductos  = req.body;
     const color = req.body.color[0]; // obtener el primer elemento del arreglo
     newproductos.color = color;
