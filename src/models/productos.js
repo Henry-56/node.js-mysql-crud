@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../db/config');
-const {Categorias} = require('../models/categorias');
+
 
 const Productos = sequelize.define("productos", {
   id: { 
@@ -12,38 +12,24 @@ const Productos = sequelize.define("productos", {
     type: Sequelize.STRING,
     allowNull: false
   },
-  descripcion: {
-    type: Sequelize.TEXT,
+  categoria: {
+    type: Sequelize.STRING,
     allowNull: false
   },
   precio: {
     type: Sequelize.FLOAT,
     allowNull: false
   },
-  talla: {
+  unidadMedida: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  cantidad: {
-    type: Sequelize.BIGINT,
-    allowNull: false
-  },
-  color: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  img_url: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  categoria_id: {  // nueva propiedad
-    type: Sequelize.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'categorias',
-      key: 'id'
-    }
-  },
+
+  // img_url: {
+  //   type: Sequelize.STRING,
+  //   allowNull: false
+  // },
+
   createdAt: {
     type: Sequelize.DATE,
     allowNull: true
@@ -54,9 +40,7 @@ const Productos = sequelize.define("productos", {
   }
 });
 
-Productos.belongsTo(Categorias, {
-   foreignKey: 'categoria_id' 
-});  // establece la relación
+
 
 Productos.sync()
   .then(() => console.log("Sequelize models initialized"))

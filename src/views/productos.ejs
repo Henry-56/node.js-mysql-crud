@@ -11,45 +11,34 @@
                             <input type="text" name="nombre" placeholder="Nombre" class="form-control">
                         </div>
                         <div class="from-group">
-                            <input type="text" name="descripcion" placeholder="descripcion" class="form-control">
-                        </div>
-                        <div class="from-group">
-                            <input type="text" name="precio" placeholder="precio" class="form-control">
-                        </div>
-                        <div class="from-group">
-                            <input type="text" name="talla" placeholder="talla" class="form-control">
-                        </div>
-                        <div class="from-group">
-                            <input type="text" name="cantidad" placeholder="cantidad" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Colores disponibles:</label>
-                            <select name="color[]" multiple class="form-control">
-                               <option value="rojo">Rojo</option>
-                               <option value="azul">Azul</option>
-                               <option value="verde">Verde</option>
-                               <option value="amarillo">Amarillo</option>
-                               <option value="amarillo">Negro</option>
-                               <option value="amarillo">Blanco</option>
-                            </select>
-                         </div>
-                         
-                        <div class="form-group">
-                            <input type="file" name="img_url" >
-                        </div>
-                        <div class="from-group">
-                            <select name="categoria_id" class="form-control">
-                                <% for(let i = 0; i < categorias.length; i++) { %>
-                                    <option value="<%= categorias[i].id %>"><%= categorias[i].nombre %></option>
-                                <% } %>
+                            <label for="categoria">Categoría:</label>
+                            <select name="categoria" class="form-control">
+                                <option value="paleria">Palería</option>
+                                <option value="ferreteria">Ferretería</option>
+                                <option value="abarrotes">Abarrotes</option>
+                                <!-- Agrega más opciones según sea necesario -->
                             </select>
                         </div>
-                       
-                        
-                        <button type="submit" class="btn btn-success" >
+                        <div class="from-group">
+                            <input type="text" name="precio" placeholder="Precio" class="form-control">
+                        </div>
+                        <div class="from-group">
+                            <label for="unidadMedida">
+                                <span style="font-size: 1.2em;">Unidad de Medida</span>
+                                <span style="font-size: 0.8em;">👀si el campo es Metro o Kilo se supondra que es "1":</span>
+                            </label>
+                            <select name="unidadMedida" class="form-control">
+                                <option value="pieza">Metro</option>
+                                <option value="kilo">Kilo</option>
+                                <option value="litro">Unidad</option>
+                                <!-- Agrega más opciones según sea necesario -->
+                            </select>
+                        </div>
+                    
+                  
+                        <button type="submit" class="btn btn-success">
                             Guardar producto
                         </button>
-                        
                     </form>
                 </div>
             </div>
@@ -61,14 +50,9 @@
                     <tr>
                         <th>N</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>Talla</th>
-                        <th>Cantidad</th>
-                        <th>Color</th>
-                       
-                        <th>Imagen</th>
                         <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>unidadMedida</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -78,17 +62,16 @@
                             <tr>
                                 <td><%= (i+1) %></td>
                                 <td><%= productos[i].nombre %></td>
-                                <td><%= productos[i].descripcion.slice(0, 35) + '...' %></td>
+                                <td><%= productos[i].categoria.slice(0, 35) + '...' %></td>
                                 <td>S/<%= productos[i].precio %></td>
-                                <td><%= productos[i].talla %></td>
-                                <td><%= productos[i].cantidad %></td>
-                                <td><%= productos[i].color %></td>
+                                <td><%= productos[i].unidadMedida %></td>
+                    
                                 
-                                <td>
+                                <!-- <td>
                                     <img src="<%= productos[i].img_url %>" alt="Imagen del producto" class="img-thumbnail">
-                                </td>
+                                </td> -->
                                 
-                                <td><%= productos[i].categoria_id %></td>
+                               
                                 <td>
                                     <a href="productos/delete/<%= productos[i].id %>" class="btn btn-danger">Eliminar</a>
                                     <a href="productos/update/<%= productos[i].id %>" class="btn btn-info">Editar</a>

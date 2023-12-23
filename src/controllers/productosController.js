@@ -5,17 +5,15 @@ function list() {
 };
 
 
+
 function save(data, Image) {
 
     return Productos.create({ 
       nombre: data.nombre,
-      descripcion: data.descripcion,
+      categoria: data.categoria,
       precio: data.precio,
       talla: data.talla,
-      cantidad: data.cantidad,
-      color: data.color,
-      img_url: Image,
-      categoria_id: data.categoria_id
+      unidadMedida: data.unidadMedida,
     });
 
 };
@@ -40,24 +38,21 @@ function edit(id) {
 
 
 
-function updatee(id, newproductos, newImagen) {
+function updatee(id, newproductos) {
   return Productos.update(
     { 
       nombre: newproductos.nombre,
-      descripcion: newproductos.descripcion,
+      categoria: newproductos.categoria,
       precio: newproductos.precio,
-      talla: newproductos.talla,
-      cantidad: newproductos.cantidad,
-      color: newproductos.color,
-      img_url: newImagen,
-      categoria_id: newproductos.categoria_id
-     }, // Objeto con los nuevos valores a actualizar
+      unidadMedida: newproductos.unidadMedida,
+    },
     { 
-      where:  {id}  
-    } // Objeto que especifica los registros que deben actualizarse
-  );
-  Productos.findByPk( id );
-};
+      where: { id }
+    }
+  ).then(() => {
+    return Productos.findByPk(id);
+  });
+}
 
 
 

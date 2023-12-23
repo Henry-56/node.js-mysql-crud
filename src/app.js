@@ -3,19 +3,17 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser'); // Importar cookie-parser
+const cors = require('cors');
 
 const app = express();
 
 // Configurar cookie-parser
 app.use(cookieParser());
-
+app.use(cors());
 // importando rutas
-const pedidoCompletadoRoutes= require('./routes/pedidosCompletados');
-const pedidoRoutes= require('./routes/pedidos');
-const categoriaRoutes= require('./routes/categorias');
-const loginRoutes= require('./routes/login');
+
 const productosRoutes= require('./routes/productos');
-const ApiCustomerRoutes= require('./routes/customerApi');
+
 
 // ...
 
@@ -38,12 +36,9 @@ app.set('views',path.join(__dirname, 'views'));
 
 // rutas
 
-app.use('/', pedidoCompletadoRoutes);
-app.use('/', pedidoRoutes);
-app.use('/', loginRoutes);
-app.use('/', categoriaRoutes);
+
 app.use('/', productosRoutes);
-app.use('/', ApiCustomerRoutes);
+
 
 // archivos estáticos
 app.use(express.static(path.join(__dirname,'public')));
